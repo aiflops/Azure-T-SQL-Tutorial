@@ -1,0 +1,13 @@
+declare @theyoungest varchar(255);
+
+/****** Gets the youngest person's full name  ******/
+SELECT 
+  @theyoungest = CONCAT_WS('-',LastName, FirstName)
+  FROM [dbo].[Person]
+  where PersonId = (
+	select top(1) PersonId 
+	FROM [dbo].[Person]
+	order by DateOfBirth desc
+	);
+
+	print @theyoungest;
