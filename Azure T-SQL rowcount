@@ -1,0 +1,16 @@
+create table TestWhile (id INT)
+DECLARE @i int=1
+    while @i<1000
+    begin
+        insert TestWhile values (@i)
+        set @i+=1
+    end
+
+select count(*) from [dbo].[TestWhile];
+
+while @@ROWCOUNT>0
+    BEGIN
+        DELETE TOP(7) FROM [dbo].[TestWhile]
+    END
+
+select count(*) from [dbo].[TestWhile];
