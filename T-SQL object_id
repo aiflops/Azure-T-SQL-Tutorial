@@ -1,5 +1,6 @@
 
 /****** T-SQL program shows how to use object_id  ******/
+/****** object_id - Returns the database object identification number of a schema-scoped object. **********/
 
 IF OBJECT_ID('TEMPDB..#tab') IS NOT NULL
 	PRINT 'TAB OBJECT ALREADY EXISTS'
