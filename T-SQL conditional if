@@ -1,0 +1,20 @@
+declare @theyoungestDate DATE;
+
+/****** Prints if the youngest person's was born on sunday  ******/
+SELECT 
+  @theyoungestDate = DateOfBirth
+  FROM [dbo].[Person]
+  where PersonId = (
+	select top(1) PersonId 
+	FROM [dbo].[Person]
+	order by DateOfBirth desc
+	);
+
+IF DATEPART(weekday, @theyoungestDate) = 1 
+	BEGIN
+		PRINT 'THIS PERSON WAS BORN ON SUNDAY ;)'
+	END
+ELSE
+	BEGIN
+		PRINT 'THIS PERSON WAS NOT BORN ON SUNDAY ;)'
+	END 
