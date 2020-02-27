@@ -1,0 +1,11 @@
+
+/****** T-SQL program shows how to use object_id  ******/
+
+IF OBJECT_ID('TEMPDB..#tab') IS NOT NULL
+	PRINT 'TAB OBJECT ALREADY EXISTS'
+	PRINT 'I MUST DROP THE OBJECT'
+	DROP TABLE #tab
+END
+
+CREATE TABLE #tab (ID INT);
+INSERT #tab VALUES (1);
