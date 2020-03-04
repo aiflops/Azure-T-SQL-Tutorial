@@ -1,16 +1,18 @@
+/****** Declare variable DATE  ******/
 declare @theyoungestDate DATE;
 
 /****** Prints if the youngest person's was born on sunday  ******/
-SELECT 
+SELECT top (1)
   @theyoungestDate = DateOfBirth
   FROM [dbo].[Person]
-  where PersonId = (
-	select top(1) PersonId 
-	FROM [dbo].[Person]
-	order by DateOfBirth desc
-	);
+  order by DateOfBirth desc;
+print @theyoungestDate
 
-IF DATEPART(weekday, @theyoungestDate) = 1 
+/****  Declare variable INT and set numer of date value  ****/
+declare @numerOfDay INT = DATEPART(weekday, @theyoungestDate);
+
+/***** Conditional statement IF which checks if the youngest person was born on sunday  *****/
+IF @numerOfDay = 1 
 	BEGIN
 		PRINT 'THIS PERSON WAS BORN ON SUNDAY ;)'
 	END
@@ -18,3 +20,20 @@ ELSE
 	BEGIN
 		PRINT 'THIS PERSON WAS NOT BORN ON SUNDAY ;)'
 	END 
+
+/****** Declare variable varchar(255)  ******/
+declare @dayName varchar(255)
+
+/********  Conditional statement Switch case   *********/
+SELECT @dayName=
+  CASE   
+      WHEN @numerOfDay = 1 THEN 'SUNDAY'   
+	  WHEN @numerOfDay = 2 THEN 'MONDAY'
+	  WHEN @numerOfDay = 3 THEN 'TUESDAY'
+	  WHEN @numerOfDay = 4 THEN 'WEDNESDAY'
+	  WHEN @numerOfDay = 5 THEN 'THURSDAY'
+	  WHEN @numerOfDay = 6 THEN 'FRIDAY'
+	  WHEN @numerOfDay = 7 THEN 'SATURDAY'
+   END 
+
+   print 'THIS PERSON WAS BORN ON ' + @dayName
